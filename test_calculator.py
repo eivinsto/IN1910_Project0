@@ -9,16 +9,27 @@ import pytest
 eps = 1e-14     #Error limit to account for machine precision
 
 "Testing add function"
-def test_add():
-    assert calculator.add(1,2)==3
+@pytest.mark.parametrize(
+    "arg, expected_output", [[(-1, -1), -2], [(1, 1), 2], [(1, 0), 1]]
+)
+def test_add(arg, expected_output):
+    assert calculator.add(arg[0], arg[1]) == expected_output
 
 "Testing add function with floats"
-def test_add_floats():
-    assert abs(calculator.add(0.1,0.2)-0.3)<eps
+@pytest.mark.parametrize(
+    "arg, expected_output", [[(-0.1, -0.1), -0.2], [(0.1, 0.1), 0.2], [(0.1, 0), 0.1]]
+)
+def test_add_floats(arg,expected_output):
+    assert abs(calculator.add(arg[0],arg[1])-expected_output)<eps
 
 "Testing add function with strings"
-def test_add_strings():
-    assert calculator.add("Hello ","World")=="Hello World"
+@pytest.mark.parametrize(
+    "arg, expected_output", [[("Hello ","World"), "Hello World"], \
+    [("Test ", "Output"), "Test Output"], \
+    [("Text and", " more text"), "Text and more text"]]
+)
+def test_add_strings(arg,expected_output):
+    assert calculator.add(arg[0],arg[1])==expected_output
 
 "Testing factorial function from calculator.py"
 def test_factorial():
