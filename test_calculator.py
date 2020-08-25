@@ -48,16 +48,26 @@ def test_sin(arg,expected_output):
     assert abs(calculator.sin(arg[0],arg[1])-expected_output)<eps
 
 "Testing divide function"
-def test_divide():
-    assert abs(calculator.divide(6,2)-3)<eps
+@pytest.mark.parametrize(
+    "arg, expected_output", [[(6,2), 3], [(8, 4), 2], [(5,5), 1]]
+)
+def test_divide(arg,expected_output):
+    assert abs(calculator.divide(arg[0],arg[1])-expected_output)<eps
 
 "Testing cos function"
-def test_cos():
+@pytest.mark.parametrize(
+    "arg, expected_output", [[(2,1000), cos(2)], [(3, 1000), cos(3)],\
+    [(5, 1000), cos(5)]]
+)
+def test_cos(arg,expected_output):
     assert abs(calculator.cos(2,1000)-cos(2))<eps
 
 "Testing power function"
-def test_power():
-    assert abs(calculator.power(3,5)-3**5)<eps
+@pytest.mark.parametrize(
+    "arg, expected_output", [[(3,5), 243], [(2, 3), 8], [(0.5,4), 1/16]]
+)
+def test_power(arg,expected_output):
+    assert abs(calculator.power(arg[0],arg[1])-expected_output)<eps
 
 """
 Testing whether add raises TypeError exception if two
