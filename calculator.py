@@ -29,7 +29,7 @@ def cos(x,N):
     #Looping from i=0 to N, adding the terms of the Taylor expansion to the sum
     for i in range(N+1):
         sum += ( (-1)**i * x**(2*i) ) /factorial(2*i)
-    return sum
+    return sum 
 
 "Function to calculate the first number to the power of the second"
 def power(x,y):
