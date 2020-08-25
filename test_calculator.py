@@ -1,14 +1,40 @@
-import calculator
+"""
+Testing functions from calculator.py
+"""
 
-"Testing add function from calculator.py"
+import calculator
+from math import factorial,sin,cos
+
+eps = 1e-14     #Error limit to account for machine precision
+
+"Testing add function"
 def test_add():
     assert calculator.add(1,2)==3
 
-"Testing add function from calculator.py with floats"
+"Testing add function with floats"
 def test_add_floats():
-    eps = 1e-14     #Error limit to account for machine precision
-    assert calculator.add(0.1,0.2)-0.3<eps
+    assert abs(calculator.add(0.1,0.2)-0.3)<eps
 
-"Testing add function from calculator.py with strings"
+"Testing add function with strings"
 def test_add_strings():
     assert calculator.add("Hello ","World")=="Hello World"
+
+"Testing factorial function from calculator.py"
+def test_factorial():
+    assert abs(calculator.factorial(6)-factorial(6))<eps
+
+"Testing sin function"
+def test_sin():
+    assert abs(calculator.sin(2,1000)-sin(2))<eps
+
+"Testing divide function"
+def test_divide():
+    assert abs(calculator.divide(6,2)-3)<eps
+
+"Testing cos function"
+def test_cos():
+    assert abs(calculator.cos(2,1000)-cos(2))<eps
+
+"Testing power function"
+def test_power():
+    assert abs(calculator.power(3,5)-3**5)<eps
