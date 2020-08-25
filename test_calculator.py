@@ -32,12 +32,20 @@ def test_add_strings(arg,expected_output):
     assert calculator.add(arg[0],arg[1])==expected_output
 
 "Testing factorial function from calculator.py"
-def test_factorial():
-    assert abs(calculator.factorial(6)-factorial(6))<eps
+@pytest.mark.parametrize(
+    "arg, expected_output", [[6, factorial(6)], \
+    [2, factorial(2)], [5, factorial(5)]]
+)
+def test_factorial(arg,expected_output):
+    assert abs(calculator.factorial(arg)-expected_output)<eps
 
 "Testing sin function"
-def test_sin():
-    assert abs(calculator.sin(2,1000)-sin(2))<eps
+@pytest.mark.parametrize(
+    "arg, expected_output", [[(2,1000), sin(2)], [(3,1000), sin(3)], \
+    [(5,1000), sin(5)]]
+)
+def test_sin(arg,expected_output):
+    assert abs(calculator.sin(arg[0],arg[1])-expected_output)<eps
 
 "Testing divide function"
 def test_divide():
