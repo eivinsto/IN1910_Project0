@@ -4,6 +4,7 @@ Testing functions from calculator.py
 
 import calculator
 from math import factorial,sin,cos
+import pytest
 
 eps = 1e-14     #Error limit to account for machine precision
 
@@ -38,3 +39,19 @@ def test_cos():
 "Testing power function"
 def test_power():
     assert abs(calculator.power(3,5)-3**5)<eps
+
+"""
+Testing whether add raises TypeError exception if two
+incompatible types are given as arguments
+"""
+def test_add_incompatible_types():
+    with pytest.raises(TypeError):
+        calculator.add("Hello ",2)
+
+"""
+Testing whether divide function returns ZeroDivisionError when we give zero as
+second argument.
+"""
+def test_divide_by_zero():
+    with pytest.raises(ZeroDivisionError):
+        calculator.divide(2,0)
