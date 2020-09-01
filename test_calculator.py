@@ -73,14 +73,20 @@ def test_power_exercise_4(arg,expected_output):
 Testing whether add raises TypeError exception if two
 incompatible types are given as arguments
 """
-def test_add_incompatible_types():
+@pytest.mark.parametrize(
+    "arg", [["Hello",2], [3,"World"], [True,"Test"]]
+)
+def test_add_incompatible_types_exercise_5(arg):
     with pytest.raises(TypeError):
-        calculator.add("Hello ",2)
+        calculator.add(arg[0],arg[1])
 
 """
 Testing whether divide function returns ZeroDivisionError when we give zero as
 second argument.
 """
-def test_divide_by_zero():
+@pytest.mark.parametrize(
+    "arg", [2,576,0.7]
+)
+def test_divide_by_zero_exercise_5(arg):
     with pytest.raises(ZeroDivisionError):
-        calculator.divide(2,0)
+        calculator.divide(arg,0)
